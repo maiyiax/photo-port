@@ -17,17 +17,27 @@ function App() {
 
   const [currentCategory, setCurrentCategory] = useState(categories[0]);
 
+  // set initial value of contactSelected to false to prevent form from showing when user navigates to homepage
+  const [contactSelected, setContactSelected] = useState(false);
+
   return (
     <div>
       <Nav
         categories={categories}
         setCurrentCategory={setCurrentCategory}
         currentCategory={currentCategory}
+        contactSelected={contactSelected}
+        setContactSelected={setContactSelected}
       ></Nav>
       <main>
-          <ContactForm></ContactForm>
+        {!contactSelected ? (
+          <>
           <Gallery currentCategory={currentCategory}></Gallery>
           <About></About>
+          </>
+        ) : (
+          <ContactForm></ContactForm>
+        )}
       </main>
     </div>
   );
